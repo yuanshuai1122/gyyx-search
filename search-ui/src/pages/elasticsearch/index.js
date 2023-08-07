@@ -5,23 +5,18 @@ import ElasticSearchAPIConnector from "@elastic/search-ui-elasticsearch-connecto
 import moment from "moment";
 
 import {
-  ErrorBoundary,
-  Facet,
-  SearchProvider,
-  SearchBox,
-  Results,
-  PagingInfo,
-  ResultsPerPage,
-  Paging,
-  Sorting,
-  WithSearch
+    ErrorBoundary,
+    Facet,
+    Paging,
+    PagingInfo,
+    Results,
+    ResultsPerPage,
+    SearchBox,
+    SearchProvider,
+    Sorting,
+    WithSearch
 } from "@elastic/react-search-ui";
-import {
-  BooleanFacet,
-  Layout,
-  SingleLinksFacet,
-  SingleSelectFacet
-} from "@elastic/react-search-ui-views";
+import {BooleanFacet, Layout, SingleLinksFacet, SingleSelectFacet} from "@elastic/react-search-ui-views";
 import "@elastic/react-search-ui-views/lib/styles/styles.css";
 
 const connector = new ElasticSearchAPIConnector({
