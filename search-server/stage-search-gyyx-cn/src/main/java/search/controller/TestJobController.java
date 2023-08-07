@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import search.beans.testJob.TestJob;
+import search.beans.testjob.TestJob;
 import search.service.TestJobService;
 
 import java.util.ArrayList;
@@ -32,11 +32,6 @@ public class TestJobController {
         Iterable<TestJob> iterable = testJobService.getAll();
         iterable.forEach(e->list.add(e));
         return list;
-    }
-
-    @RequestMapping("/getAll2")
-    public List<TestJob> getAll2() {
-        return testJobService.searchAllData("test-job");
     }
 
 

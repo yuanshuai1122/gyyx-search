@@ -1,4 +1,4 @@
-package search.beans.testJob;
+package search.beans.testjob;
 
 import lombok.Data;
 

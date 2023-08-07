@@ -1,11 +1,7 @@
-package search.beans.testJob;
+package search.beans.testjob;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.springframework.data.elasticsearch.annotations.Field;
-import search.utils.DateUtils;
-
-import java.util.Date;
 
 /**
  * @program: gyyx-search
