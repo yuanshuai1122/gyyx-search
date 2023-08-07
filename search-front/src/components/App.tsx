@@ -1,11 +1,20 @@
 import React from 'react';
+import SearchLayout from "./SearchLayout";
+import SearchCard from "./SearchCard";
+const App: React.FC = () => {
 
-const App = () => {
+
+
+
     return (
-        <div>
-          <h1>aaaaaa</h1>
-        </div>
+
+        <SearchLayout
+            content={
+                <SearchCard/>
+            }
+        />
+
     );
-};
+}
 
 export default App;
