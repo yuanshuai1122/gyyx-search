@@ -37,7 +37,7 @@ public class SearchController {
      */
     @RequestMapping("/list")
     public ResultBean<Object> searchList(@RequestParam("channel") String channel,
-                                         @RequestParam("keywords") String keywords,
+                                         @RequestParam(value = "keywords", required = false) String keywords,
                                          @RequestParam(value = "extension", required = false) String extension,
                                          @RequestParam(value = "projectName", required = false) String projectName,
                                          @RequestParam("pageNum") Integer pageNum,
