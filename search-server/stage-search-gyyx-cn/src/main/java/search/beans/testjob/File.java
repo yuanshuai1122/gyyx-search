@@ -1,7 +1,6 @@
 package search.beans.testjob;
 
 import lombok.Data;
-import org.springframework.data.elasticsearch.annotations.Field;
 
 /**
  * @program: gyyx-search
@@ -20,7 +19,6 @@ public class File {
     /**
      * 内容类型
      */
-    @Field("content_type")
     private String contentType;
 
     /**
@@ -31,19 +29,16 @@ public class File {
     /**
      * 最后修改时间
      */
-    @Field("last_modified")
     private String lastModified;
 
     /**
      * 最后访问时间
      */
-    @Field("last_accessed")
     private String lastAccessed;
 
     /**
      * 最后索引日期
      */
-    @Field("indexing_date")
     private String indexingDate;
 
     /**

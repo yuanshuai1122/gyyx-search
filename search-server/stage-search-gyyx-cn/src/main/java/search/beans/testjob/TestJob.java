@@ -2,7 +2,6 @@ package search.beans.testjob;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.elasticsearch.annotations.Document;
 
 /**
  * @program: gyyx-search
@@ -11,7 +10,6 @@ import org.springframework.data.elasticsearch.annotations.Document;
  * @create: 2023-08-07 10:57
  **/
 @Data
-@Document(indexName = "test-job")
 public class TestJob {
 
     /**

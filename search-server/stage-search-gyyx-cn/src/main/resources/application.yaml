@@ -1,9 +1,12 @@
 server:
   port: 8081
-spring:
-  elasticsearch:
-    uris: aabb.world:9200
-    username: elastic
-    password: 123456
-    connection-timeout: 5000
-    socket-timeout: 30000
+
+# ElasticSearch配置
+elasticsearch:
+  scheme: http
+  address: aabb.world:9200
+  username: elastic
+  password: 123456
+  socket-timeout: 30000
+  connection-timeout: 5000
+  connection-request-timeout: 5000
