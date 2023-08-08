@@ -1,21 +1,38 @@
-import React from 'react';
-import {Card} from "antd";
+import React, {ReactNode, useEffect} from 'react';
+import {Card, Space, Tag} from "antd";
 
-const SearchCard: React.FC  = () => {
+const contentList = (contentMap: Map<string, string>): ReactNode[] => {
+    const contentList: ReactNode[] = [];
+    contentMap.forEach((value, key) => {
+        const pNode: ReactNode =
+            <p>
+                {key + " : " + value}
+            </p>
+        contentList.push(pNode)
+    })
+
+    return contentList
+}
+
+
+interface Props {
+    title: string,
+    contents: Map<string, string>
+}
+const SearchCard  = (props: Props) => {
+
+    const {title, contents} = props
+
     return (
         <>
             <Card
-                title="标题"
+                title = {title}
                 bordered={false} style={{width: '90%', marginLeft: 50, marginBottom: 15, marginTop: 15}}
                 hoverable={true}
             >
-                <p>Card content</p>
-                <p>Card content</p>
-                <p>Card content</p>
-                <p>Card content</p>
-                <p>Card content</p>
-                <p>Card content</p>
-                <p>Card content</p>
+                {
+                    contentList(contents).map(item => item)
+                }
             </Card>
         </>
     );

@@ -6,6 +6,8 @@ const { Header, Footer, Sider, Content } = Layout;
 
 const headerStyle: React.CSSProperties = {
     textAlign: 'center',
+    display: 'flex',
+    alignItems: 'center',
     color: '#fff',
     height: 64,
     paddingInline: 50,
@@ -34,14 +36,14 @@ const footerStyle: React.CSSProperties = {
 
 interface Props {
     header?: ReactNode
-    content?: ReactNode
+    contents?: ReactNode[]
     sider?: ReactNode
     footer?: ReactNode
 }
 
 const SearchLayout = (props: Props) => {
 
-    const {header, content, sider, footer} = props
+    const {header, contents, sider, footer} = props
 
 
     return(
@@ -52,7 +54,9 @@ const SearchLayout = (props: Props) => {
                 </Header>
                 <Layout hasSider>
                     <Content style={contentStyle}>
-                        {content}
+                        {contents?.map((item, index)=> {
+                            return item;
+                        })}
                     </Content>
                     <Sider
                         width={400}
