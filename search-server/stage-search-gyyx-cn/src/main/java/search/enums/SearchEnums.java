@@ -22,7 +22,7 @@ public enum SearchEnums {
     /**
      * 代码
      */
-    CODE("code","代码","codeSearchStrategy"),
+    CODE("test-job","代码","codeSearchStrategy"),
 
     /**
      * 微信支付

@@ -14,7 +14,7 @@ import search.strategy.SearchStrategy;
 @Component("wechatSearchStrategy")
 public class WechatSearchStrategyImpl implements SearchStrategy {
     @Override
-    public ResultBean<Object> searchList(String channel, String keywords) {
+    public ResultBean<Object> searchList(String channel, String keywords, String extension, String projectName, Integer pageNum, Integer pageSize) {
         return new ResultBean<>(RetCodeEnum.SUCCESS, "获取成功", null);
     }
 }

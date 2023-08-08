@@ -23,18 +23,27 @@ public class SearchController {
 
     private final SearchService service;
 
+
     /**
      * 搜索信息列表
      *
-     * @param channel  渠道
-     * @param keywords 关键词
+     * @param channel     通道
+     * @param keywords    关键词
+     * @param extension   文件后缀
+     * @param projectName 项目名称
+     * @param pageNum     页数
+     * @param pageSize    页面大小
      * @return {@link ResultBean}<{@link Object}>
      */
     @RequestMapping("/list")
     public ResultBean<Object> searchList(@RequestParam("channel") String channel,
-                                         @RequestParam("keywords") String keywords) {
-        log.info("开始搜索信息列表，channel:{}, keywords:{}", channel, keywords);
-        return service.searchList(channel, keywords);
+                                         @RequestParam("keywords") String keywords,
+                                         @RequestParam(value = "extension", required = false) String extension,
+                                         @RequestParam(value = "projectName", required = false) String projectName,
+                                         @RequestParam("pageNum") Integer pageNum,
+                                         @RequestParam("pageSize") Integer pageSize) {
+        log.info("开始搜索信息列表，channel:{}, keywords:{}, extension:{}, projectName:{}, pageNum:{}, pageSize:{}", channel, keywords, extension, projectName, pageNum, pageSize);
+        return service.searchList(channel, keywords, extension, projectName, pageNum, pageSize);
     }
 
 

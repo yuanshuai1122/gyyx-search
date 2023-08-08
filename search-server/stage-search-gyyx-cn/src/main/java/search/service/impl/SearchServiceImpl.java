@@ -17,12 +17,12 @@ import search.strategy.SearchStrategy;
 public class SearchServiceImpl implements SearchService {
 
     @Override
-    public ResultBean<Object> searchList(String channel, String keywords) {
+    public ResultBean<Object> searchList(String channel, String keywords, String extension, String projectName, Integer pageNum, Integer pageSize){
         // 通过支付策略工厂拿到支付类型实现
         SearchStrategy payStrategy = SearchStrategyFactory.getPayStrategy(channel);
         if(payStrategy == null){
             return new ResultBean<>(RetCodeEnum.PARAM_ERROR, "搜索渠道有误", null);
         }
-        return payStrategy.searchList(channel, keywords);
+        return payStrategy.searchList(channel, keywords, extension, projectName, pageNum, pageSize);
     }
 }
