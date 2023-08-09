@@ -88,11 +88,19 @@ public class CodeSearchStrategyImpl implements SearchStrategy {
                 FileInfo fileInfo = new FileInfo();
                 fileInfo.setId(testJob.getId());
                 // 摘要 截取模糊查询左右各20个字符 TODO 暂时截取40个字符展示
-                fileInfo.setResume(testJob.getContent().substring(0, 100));
+                String resume = "";
+                if (StringUtils.isNotBlank(testJob.getContent())) {
+                    resume = testJob.getContent().substring(0, 200);
+                }
+                fileInfo.setResume(resume);
                 fileInfo.setExtension(testJob.getFile().getExtension());
                 fileInfo.setFilesize(testJob.getFile().getFilesize());
                 fileInfo.setFilename(testJob.getFile().getFilename());
-                fileInfo.setProjectName(testJob.getPath().getVirtual().split("/")[1]);
+                String fileProjectName = "";
+                if (StringUtils.isNotBlank(testJob.getPath().getVirtual())) {
+                    fileProjectName = testJob.getPath().getVirtual().split("/")[1];
+                }
+                fileInfo.setProjectName(fileProjectName);
                 fileInfo.setIndexingDate(testJob.getFile().getIndexingDate());
                 fileInfos.add(fileInfo);
             }

@@ -1,5 +1,8 @@
 import React, {ReactNode, useEffect} from 'react';
-import {Card, Space, Tag} from "antd";
+import {Avatar, Card, Space, Tag, Typography} from "antd";
+import Meta from "antd/es/card/Meta";
+import {FolderFilled, TwitterOutlined} from "@ant-design/icons";
+import {Link} from "react-router-dom";
 
 const contentList = (contentMap: Map<string, string|number>): ReactNode[] => {
     const contentList: ReactNode[] = [];
@@ -17,19 +20,32 @@ const contentList = (contentMap: Map<string, string|number>): ReactNode[] => {
 
 interface Props {
     title: string,
+    projectName: string
     contents: Map<string, string|number>
 }
 const SearchCard  = (props: Props) => {
 
-    const {title, contents} = props
+    const {title, projectName, contents} = props
 
     return (
         <>
             <Card
-                title = {title}
-                bordered={false} style={{width: '90%', marginLeft: 50, marginBottom: 15, marginTop: 15}}
+                //title = {title}
+                bordered={true}
+                style={{width: '90%', marginLeft: 50, marginBottom: 15, marginTop: 15}}
                 hoverable={true}
             >
+                <Meta
+                    //avatar={<Avatar src="https://xsgames.co/randomusers/avatar.php?g=pixel" />}
+                    title={
+                        title
+                    }
+                    description={
+                        <Tag icon={<FolderFilled />} color="geekblue">
+                            {projectName}
+                        </Tag>
+                    }
+                />
                 {
                     contentList(contents).map(item => item)
                 }

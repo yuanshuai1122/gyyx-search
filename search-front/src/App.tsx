@@ -1,86 +1,15 @@
-import React, {ReactNode, useEffect, useState} from 'react';
-import SearchLayout from "./components/SearchLayout";
-import SearchCard from "./components/SearchCard";
-import SearchInput from "./components/SearchInput";
-import SearchPagination from "./components/SearchPagination";
-import {getFilePageList} from "./services/search";
-import {FileInfo, FileInfoList, PageInfo} from "./types/search";
+import React from 'react';
+import {Route, Routes} from 'react-router-dom';
+import Index from "./pages/Index";
 
-
-/**
- * 获取内容列表
- * @param fileInfos 文件信息
- */
-const getContentList = (fileInfos: FileInfo[]|undefined): ReactNode[] => {
-    const contents: ReactNode[] = [];
-    if (fileInfos == undefined) {
-        return contents
-    }
-    fileInfos.forEach((item, index) => {
-        contents.push(
-            <SearchCard key={index} title={item.filename} contents={
-                new Map<string, string|number>([
-                    ["ID：", item.id],
-                    ["项目名：", item.filename],
-                    ["文件后缀：", item.extension],
-                    ["内容摘要：", item.resume],
-                    ["文件大小：", item.filesize],
-                    ["收录时间：", item.indexingDate]
-                ])
-            }/>
-        )
-    })
-    return contents;
-}
-
-
-const App: React.FC = () => {
-
-    const [nodeList, setNodeList] = useState<ReactNode[]>();
-    const [pageInfo, setPageInfo] = useState<PageInfo>({
-        pageNum: 1,
-        pageSize: 20,
-        total: 100
-    });
-
-    useEffect(()=> {
-        getFilePageList({
-            channel: "test-job",
-            pageNum: 1,
-            pageSize: 20
-        }).then(response => {
-            console.log(response.data)
-            // 设置分页信息
-            setPageInfo({
-                pageNum: response.data.pageNum,
-                pageSize: response.data.pageSize,
-                total: response.data.total
-            })
-            // 调用方法生成组件列表
-            setNodeList(
-                getContentList(response.data.fileInfos)
-            )
-        }).catch(error => {
-            console.error(error)
-        })
-
-    }, [])
-
+const App = () => {
     return (
-
-        <SearchLayout
-            header={
-            <SearchInput/>
-            }
-            contents={
-                nodeList
-            }
-            footer={
-            <SearchPagination defaultCurrent={pageInfo.pageNum} total={pageInfo.total}/>
-            }
-        />
-
+        <>
+            <Routes>
+                <Route path="/" element={<Index />}></Route>
+            </Routes>
+        </>
     );
-}
+};
 
 export default App;
