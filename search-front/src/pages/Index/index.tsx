@@ -22,6 +22,7 @@ const getContentList = (fileInfos: FileInfo[]|undefined): ReactNode[] => {
                 key={index}
                 title={item.filename}
                 projectName={item.projectName}
+                id={item.id}
                 contents={new Map<string, string|number>([
                     ["ID：", item.id],
                     ["文件后缀：", item.extension],
@@ -71,9 +72,6 @@ const Index: React.FC = () => {
     return (
 
         <SearchLayout
-            header={
-                <SearchInput/>
-            }
             contents={
                 nodeList
             }

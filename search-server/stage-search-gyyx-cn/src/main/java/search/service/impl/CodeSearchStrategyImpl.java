@@ -90,7 +90,7 @@ public class CodeSearchStrategyImpl implements SearchStrategy {
                 // 摘要 截取模糊查询左右各20个字符 TODO 暂时截取40个字符展示
                 String resume = "";
                 if (StringUtils.isNotBlank(testJob.getContent())) {
-                    resume = testJob.getContent().substring(0, 200);
+                    resume = testJob.getContent().substring(0, 300);
                 }
                 fileInfo.setResume(resume);
                 fileInfo.setExtension(testJob.getFile().getExtension());

@@ -15,7 +15,7 @@ const headerStyle: React.CSSProperties = {
 };
 
 const contentStyle: React.CSSProperties = {
-    textAlign: 'center',
+    //textAlign: 'center',
     minHeight: 300,
     color: '#fff',
     backgroundColor: '#108ee9',
@@ -49,9 +49,9 @@ const SearchLayout = (props: Props) => {
     return(
         <Space direction="vertical" style={{ width: '100%' }} size={[0, 48]}>
             <Layout>
-                <Header style={headerStyle}>
-                    {header}
-                </Header>
+                {/*<Header style={headerStyle}>*/}
+                {/*    {header}*/}
+                {/*</Header>*/}
                 <Layout hasSider>
                     <Content style={contentStyle}>
                         {contents?.map((item, index)=> {
