@@ -19,14 +19,10 @@ G
 search-ui/src/Router.js,9/7/977615f35650e499d3130e66f3a752f213fac56b
 i
 9search-front/.idea/inspectionProfiles/Project_Default.xml,a/3/a34f9068a52d4319c6f4c184b72d66ed189b0f9a
-K
-search-front/pnpm-lock.yaml,d/2/d28cb0c4cc75fb6091f1b3aa2d4b9c8e4df33795
 `
 0search-front/src/components/SearchCard/index.tsx,3/6/36e42873b895956674af99701cadd121052d27bb
 b
 2search-front/src/components/SearchLayout/index.tsx,8/4/84d4f7e74a938bb19f51026e5cecc4d401db0de0
-I
-search-front/package.json,4/f/4f8edd73699ae5a06e08187a01ff63ccce3ade4a
 S
 #search-front/src/components/App.tsx,c/9/c9a2b3b47fd1651a1779d289c432bbd22fea3077
 ã
@@ -85,8 +81,6 @@ g
 7search-ui/.idea/sonarlint/securityhotspotstore/index.pb,7/a/7ad33512112e2baddb8331dc93dfbd7887667475
 Å
 Qsearch-ui/.idea/sonarlint/issuestore/5/e/5e8ddba814c3eac71a3491f62c12f2a9102f3e77,7/7/77b700bf301d53f9cff80aea777bb5bc48badf35
-j
-:search-front/.idea/sonarlint/securityhotspotstore/index.pb,8/c/8cff6c066b6035e74930b5366c1f14dbdd83a7ea
 é
 ^search-front/.idea/sonarlint/securityhotspotstore/4/9/496a238a6afa168dbaf6efd37bb459331589579c,4/6/46591eae82f6f3edd5f9b5b2b7a8285f6c2d7ce7
 é
@@ -103,8 +97,6 @@ j
 ^search-front/.idea/sonarlint/securityhotspotstore/e/5/e55bdaf86a90390ef12ee1673a8c0cfa3a47e9b4,f/c/fc6ac107f7cd02c36adac96c390811007c32eee4
 é
 ^search-front/.idea/sonarlint/securityhotspotstore/b/1/b1d53c6a722edf09140c9a1767542077eff3b96f,6/b/6b0a470d15aefd99a69b8046cbd61ec73a5551cf
-`
-0search-front/.idea/sonarlint/issuestore/index.pb,2/f/2f037c932adb338eacd87f033d293d8526c6ffd5
 Å
 Qsearch-ui/.idea/sonarlint/issuestore/5/3/53dff6e5ce36eb1ff956b6cc5bb2e02a6a8758fc,8/e/8ec19b1764d52c7e76ffd5aab5c74f9c743a28d5
 ã

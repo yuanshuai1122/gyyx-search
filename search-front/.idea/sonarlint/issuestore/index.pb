@@ -16,8 +16,6 @@ A
 src/index.tsx,5/a/5ab44fe33ca96299f51ad4778a73e425b92bf439
 9
 	README.md,8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-=
-tsconfig.json,6/1/61ebb9fd6e8cf9082658121d5d81e297791dacd0
 >
 pnpm-lock.yaml,a/8/a829ed6336deb68f9874e5da490e1ec440b0e9b7
 \

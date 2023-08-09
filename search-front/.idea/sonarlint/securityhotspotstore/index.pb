@@ -16,8 +16,6 @@ A
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
-=
-tsconfig.json,6/1/61ebb9fd6e8cf9082658121d5d81e297791dacd0
 >
 pnpm-lock.yaml,a/8/a829ed6336deb68f9874e5da490e1ec440b0e9b7
 \
