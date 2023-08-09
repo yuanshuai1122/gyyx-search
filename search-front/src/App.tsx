@@ -1,53 +1,70 @@
-import React, {ReactNode, useEffect} from 'react';
+import React, {ReactNode, useEffect, useState} from 'react';
 import SearchLayout from "./components/SearchLayout";
 import SearchCard from "./components/SearchCard";
 import SearchInput from "./components/SearchInput";
 import SearchPagination from "./components/SearchPagination";
 import {getFilePageList} from "./services/search";
+import {FileInfo, FileInfoList, PageInfo} from "./types/search";
+
+
+/**
+ * 获取内容列表
+ * @param fileInfos 文件信息
+ */
+const getContentList = (fileInfos: FileInfo[]|undefined): ReactNode[] => {
+    const contents: ReactNode[] = [];
+    if (fileInfos == undefined) {
+        return contents
+    }
+    fileInfos.forEach((item, index) => {
+        contents.push(
+            <SearchCard key={index} title={item.filename} contents={
+                new Map<string, string|number>([
+                    ["ID：", item.id],
+                    ["项目名：", item.filename],
+                    ["文件后缀：", item.extension],
+                    ["内容摘要：", item.resume],
+                    ["文件大小：", item.filesize],
+                    ["收录时间：", item.indexingDate]
+                ])
+            }/>
+        )
+    })
+    return contents;
+}
+
+
 const App: React.FC = () => {
 
+    const [nodeList, setNodeList] = useState<ReactNode[]>();
+    const [pageInfo, setPageInfo] = useState<PageInfo>({
+        pageNum: 1,
+        pageSize: 20,
+        total: 100
+    });
 
     useEffect(()=> {
         getFilePageList({
             channel: "test-job",
             pageNum: 1,
-            pageSize: 10
+            pageSize: 20
         }).then(response => {
-            console.log(response)
+            console.log(response.data)
+            // 设置分页信息
+            setPageInfo({
+                pageNum: response.data.pageNum,
+                pageSize: response.data.pageSize,
+                total: response.data.total
+            })
+            // 调用方法生成组件列表
+            setNodeList(
+                getContentList(response.data.fileInfos)
+            )
         }).catch(error => {
             console.error(error)
         })
 
-
     }, [])
-
-
-
-
-    const contents: ReactNode[] = [
-        <SearchCard key={1} title={"你好"} contents={
-            new Map([
-            ["key1", "value1"],
-            ["key2", "value2"],
-            ["key3", "value2"],
-            ["key4", "value2"],
-            ["key5", "value2"],
-            ["key6", "value2"],
-            ])
-        }/>,
-        <SearchCard key={2} title={"你好"} contents={
-            new Map([
-                ["key1", "value1"],
-                ["key2", "value2"],
-                ["key3", "value2"],
-                ["key4", "value2"],
-                ["key5", "value2"],
-                ["key6", "value2"],
-            ])
-        }/>
-
-    ];
-
 
     return (
 
@@ -56,10 +73,10 @@ const App: React.FC = () => {
             <SearchInput/>
             }
             contents={
-                contents
+                nodeList
             }
             footer={
-            <SearchPagination defaultCurrent={6} total={500}/>
+            <SearchPagination defaultCurrent={pageInfo.pageNum} total={pageInfo.total}/>
             }
         />
 

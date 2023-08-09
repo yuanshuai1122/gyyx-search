@@ -1,12 +1,12 @@
 import React, {ReactNode, useEffect} from 'react';
 import {Card, Space, Tag} from "antd";
 
-const contentList = (contentMap: Map<string, string>): ReactNode[] => {
+const contentList = (contentMap: Map<string, string|number>): ReactNode[] => {
     const contentList: ReactNode[] = [];
     contentMap.forEach((value, key) => {
         const pNode: ReactNode =
             <p>
-                {key + " : " + value}
+                {key + value}
             </p>
         contentList.push(pNode)
     })
@@ -17,7 +17,7 @@ const contentList = (contentMap: Map<string, string>): ReactNode[] => {
 
 interface Props {
     title: string,
-    contents: Map<string, string>
+    contents: Map<string, string|number>
 }
 const SearchCard  = (props: Props) => {
 
