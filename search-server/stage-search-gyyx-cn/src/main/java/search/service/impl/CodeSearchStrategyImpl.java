@@ -17,6 +17,8 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.stereotype.Component;
+import search.beans.filelist.FileInfo;
+import search.beans.filelist.FilePageList;
 import search.beans.testjob.TestJob;
 import search.enums.SearchEnums;
 import search.strategy.SearchStrategy;
@@ -78,13 +80,29 @@ public class CodeSearchStrategyImpl implements SearchStrategy {
             if (hits.length == 0) {
                 return new ResultBean<>(RetCodeEnum.SUCCESS, "查询成功", Collections.emptyList());
             }
-            ArrayList<TestJob> testJobs = new ArrayList<>();
+            FilePageList filePageList = new FilePageList();
+            ArrayList<FileInfo> fileInfos = new ArrayList<>();
             for (SearchHit hit : hits) {
                 TestJob testJob = gson.fromJson(gson.toJson(hit.getSourceAsMap()), TestJob.class);
                 testJob.setId(hit.getId());
-                testJobs.add(testJob);
+                FileInfo fileInfo = new FileInfo();
+                fileInfo.setId(testJob.getId());
+                // 摘要 截取模糊查询左右各20个字符 TODO 暂时截取40个字符展示
+                fileInfo.setResume(testJob.getContent().substring(0, 100));
+                fileInfo.setExtension(testJob.getFile().getExtension());
+                fileInfo.setFilesize(testJob.getFile().getFilesize());
+                fileInfo.setFilename(testJob.getFile().getFilename());
+                fileInfo.setProjectName(testJob.getPath().getVirtual().split("/")[1]);
+                fileInfo.setIndexingDate(testJob.getFile().getIndexingDate());
+                fileInfos.add(fileInfo);
             }
-            return new ResultBean<>(RetCodeEnum.SUCCESS, "查询成功", testJobs);
+            filePageList.setFileInfos(fileInfos);
+            filePageList.setPageNum(pageNum);
+            filePageList.setPageSize(pageSize);
+            filePageList.setTotal(response.getHits().getTotalHits().value);
+
+
+            return new ResultBean<>(RetCodeEnum.SUCCESS, "查询成功", filePageList);
         }catch (Exception e) {
             log.error("查询文件列表出现异常, e:{}", e.toString());
             return new ResultBean<>(RetCodeEnum.SERVER_ERROR, "查询信息列表失败", null);
