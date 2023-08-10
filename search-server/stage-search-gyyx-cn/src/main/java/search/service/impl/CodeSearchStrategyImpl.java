@@ -19,10 +19,10 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.stereotype.Component;
-import search.beans.filelist.FileInfo;
-import search.beans.filelist.FilePageList;
-import search.beans.codefileinfo.CodeFileInfo;
-import search.beans.vo.CodeFileDetail;
+import search.beans.filelist.CodeDocConstant;
+import search.beans.filelist.DocPageList;
+import search.beans.codedocinfo.CodeDocInfo;
+import search.beans.vo.CodeDocDetail;
 import search.enums.SearchEnums;
 import search.strategy.SearchStrategy;
 
@@ -83,36 +83,36 @@ public class CodeSearchStrategyImpl implements SearchStrategy {
             if (hits.length == 0) {
                 return new ResultBean<>(RetCodeEnum.SUCCESS, "查询成功", Collections.emptyList());
             }
-            FilePageList filePageList = new FilePageList();
-            ArrayList<FileInfo> fileInfos = new ArrayList<>();
+            DocPageList docPageList = new DocPageList();
+            ArrayList<CodeDocConstant> codeDocConstants = new ArrayList<>();
             for (SearchHit hit : hits) {
-                CodeFileInfo codeFileInfo = gson.fromJson(gson.toJson(hit.getSourceAsMap()), CodeFileInfo.class);
-                codeFileInfo.setId(hit.getId());
-                FileInfo fileInfo = new FileInfo();
-                fileInfo.setId(codeFileInfo.getId());
+                CodeDocInfo codeDocInfo = gson.fromJson(gson.toJson(hit.getSourceAsMap()), CodeDocInfo.class);
+                codeDocInfo.setId(hit.getId());
+                CodeDocConstant codeDocConstant = new CodeDocConstant();
+                codeDocConstant.setId(codeDocInfo.getId());
                 // 摘要 截取模糊查询左右各20个字符 TODO 暂时截取40个字符展示
                 String resume = "";
-                if (StringUtils.isNotBlank(codeFileInfo.getContent())) {
-                    resume = codeFileInfo.getContent().substring(0, 300);
+                if (StringUtils.isNotBlank(codeDocInfo.getContent())) {
+                    resume = codeDocInfo.getContent().substring(0, 300);
                 }
-                fileInfo.setResume(resume);
-                fileInfo.setExtension(codeFileInfo.getFile().getExtension());
-                fileInfo.setFilesize(codeFileInfo.getFile().getFilesize());
-                fileInfo.setFilename(codeFileInfo.getFile().getFilename());
+                codeDocConstant.setResume(resume);
+                codeDocConstant.setExtension(codeDocInfo.getFile().getExtension());
+                codeDocConstant.setFilesize(codeDocInfo.getFile().getFilesize());
+                codeDocConstant.setFilename(codeDocInfo.getFile().getFilename());
                 String fileProjectName = "";
-                if (StringUtils.isNotBlank(codeFileInfo.getPath().getVirtual())) {
-                    fileProjectName = codeFileInfo.getPath().getVirtual().split("/")[1];
+                if (StringUtils.isNotBlank(codeDocInfo.getPath().getVirtual())) {
+                    fileProjectName = codeDocInfo.getPath().getVirtual().split("/")[1];
                 }
-                fileInfo.setProjectName(fileProjectName);
-                fileInfo.setIndexingDate(codeFileInfo.getFile().getIndexingDate());
-                fileInfos.add(fileInfo);
+                codeDocConstant.setProjectName(fileProjectName);
+                codeDocConstant.setIndexingDate(codeDocInfo.getFile().getIndexingDate());
+                codeDocConstants.add(codeDocConstant);
             }
-            filePageList.setFileInfos(fileInfos);
-            filePageList.setPageNum(pageNum);
-            filePageList.setPageSize(pageSize);
-            filePageList.setTotal(response.getHits().getTotalHits().value);
+            docPageList.setCodeDocConstants(codeDocConstants);
+            docPageList.setPageNum(pageNum);
+            docPageList.setPageSize(pageSize);
+            docPageList.setTotal(response.getHits().getTotalHits().value);
 
-            return new ResultBean<>(RetCodeEnum.SUCCESS, "查询成功", filePageList);
+            return new ResultBean<>(RetCodeEnum.SUCCESS, "查询成功", docPageList);
         }catch (Exception e) {
             log.error("查询文件列表出现异常, e:{}", e.toString());
             return new ResultBean<>(RetCodeEnum.SERVER_ERROR, "查询信息列表失败", null);
@@ -137,26 +137,26 @@ public class CodeSearchStrategyImpl implements SearchStrategy {
             log.info("根据id查询文档详情开始发送请求，request:{}", request);
             GetResponse response = client.get(request, RequestOptions.DEFAULT);
             // 反序列化
-            CodeFileInfo fileInfo = gson.fromJson(gson.toJson(response.getSourceAsMap()), CodeFileInfo.class);
+            CodeDocInfo fileInfo = gson.fromJson(gson.toJson(response.getSourceAsMap()), CodeDocInfo.class);
             fileInfo.setId(response.getId());
-            CodeFileDetail fileDetail = new CodeFileDetail();
-            fileDetail.setId(fileInfo.getId());
-            fileDetail.setFilename(fileInfo.getFile().getFilename());
-            fileDetail.setContent(fileInfo.getContent());
-            fileDetail.setExtension(fileInfo.getFile().getExtension());
-            fileDetail.setContentType(fileInfo.getFile().getContentType());
-            fileDetail.setCreated(fileInfo.getFile().getCreated());
-            fileDetail.setLastModified(fileInfo.getFile().getLastModified());
-            fileDetail.setLastAccessed(fileInfo.getFile().getLastAccessed());
-            fileDetail.setIndexingDate(fileInfo.getFile().getIndexingDate());
-            fileDetail.setFilesize(fileInfo.getFile().getFilesize());
+            CodeDocDetail docDetail = new CodeDocDetail();
+            docDetail.setId(fileInfo.getId());
+            docDetail.setFilename(fileInfo.getFile().getFilename());
+            docDetail.setContent(fileInfo.getContent());
+            docDetail.setExtension(fileInfo.getFile().getExtension());
+            docDetail.setContentType(fileInfo.getFile().getContentType());
+            docDetail.setCreated(fileInfo.getFile().getCreated());
+            docDetail.setLastModified(fileInfo.getFile().getLastModified());
+            docDetail.setLastAccessed(fileInfo.getFile().getLastAccessed());
+            docDetail.setIndexingDate(fileInfo.getFile().getIndexingDate());
+            docDetail.setFilesize(fileInfo.getFile().getFilesize());
             String fileProjectName = "";
             if (StringUtils.isNotBlank(fileInfo.getPath().getVirtual())) {
                 fileProjectName = fileInfo.getPath().getVirtual().split("/")[1];
             }
-            fileDetail.setProjectName(fileProjectName);
-            fileDetail.setFilePath(fileInfo.getPath().getVirtual());
-            return new ResultBean<>(RetCodeEnum.SUCCESS, "查询成功", fileDetail);
+            docDetail.setProjectName(fileProjectName);
+            docDetail.setFilePath(fileInfo.getPath().getVirtual());
+            return new ResultBean<>(RetCodeEnum.SUCCESS, "查询成功", docDetail);
         }catch (Exception e) {
             log.info("根据id查询文档详情发生异常,e:{}", e.toString());
             return new ResultBean<>(RetCodeEnum.SERVER_ERROR, "查询文档详情失败", null);

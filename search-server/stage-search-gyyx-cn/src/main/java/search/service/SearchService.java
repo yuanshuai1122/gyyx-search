@@ -12,7 +12,7 @@ public interface SearchService {
 
 
     /**
-     * 搜索信息列表
+     * 搜索文档列表
      *
      * @param channel     通道
      * @param keywords    关键词

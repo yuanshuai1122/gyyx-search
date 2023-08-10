@@ -11,12 +11,12 @@ import java.util.List;
  * @create: 2023-08-09 13:00
  **/
 @Data
-public class FilePageList {
+public class DocPageList {
 
     /**
      * 文件信息
      */
-    private List<FileInfo> fileInfos;
+    private List<CodeDocConstant> codeDocConstants;
 
     /**
      * 页数

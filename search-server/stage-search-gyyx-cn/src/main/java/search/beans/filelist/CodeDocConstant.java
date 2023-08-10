@@ -12,7 +12,7 @@ import java.util.Date;
  * @create: 2023-08-09 12:55
  **/
 @Data
-public class FileInfo {
+public class CodeDocConstant {
 
     /**
      * ID

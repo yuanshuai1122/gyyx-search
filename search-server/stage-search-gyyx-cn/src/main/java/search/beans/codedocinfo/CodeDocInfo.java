@@ -1,4 +1,4 @@
-package search.beans.codefileinfo;
+package search.beans.codedocinfo;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -10,7 +10,7 @@ import org.springframework.data.annotation.Id;
  * @create: 2023-08-07 10:57
  **/
 @Data
-public class CodeFileInfo {
+public class CodeDocInfo {
 
     /**
      * 索引id

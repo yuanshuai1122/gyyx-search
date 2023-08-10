@@ -1,33 +1,15 @@
-package search.beans.vo;
+package search.beans.codedocinfo;
 
 import lombok.Data;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  * @program: gyyx-search
- * @description: 代码文件详情
+ * @description: 文件属性
  * @author: yuanshuai
- * @create: 2023-08-10 09:28
+ * @create: 2023-08-07 10:59
  **/
 @Data
-public class CodeFileDetail {
-
-    /**
-     * ID
-     */
-    private String id;
-
-    /**
-     * 文件名
-     */
-    private String filename;
-
-    /**
-     * 内容
-     */
-    private String content;
+public class File {
 
     /**
      * 文件后缀
@@ -55,7 +37,7 @@ public class CodeFileDetail {
     private String lastAccessed;
 
     /**
-     * 索引日期
+     * 最后索引日期
      */
     private String indexingDate;
 
@@ -65,14 +47,14 @@ public class CodeFileDetail {
     private Integer filesize;
 
     /**
-     * 项目名称
+     * 文件名
      */
-    private String projectName;
+    private String filename;
 
     /**
-     * 路径
+     * 文件URL
      */
-    private String filePath;
+    private String url;
 
 
 }
