@@ -26,5 +26,3 @@ F
 pnpm-lock.yaml,a/8/a829ed6336deb68f9874e5da490e1ec440b0e9b7
 <
 package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
-S
-#src/components/SearchCard/index.tsx,b/1/b1d53c6a722edf09140c9a1767542077eff3b96f

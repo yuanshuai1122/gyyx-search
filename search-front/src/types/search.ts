@@ -45,4 +45,12 @@ export interface DocDetail {
     filePath: string
 }
 
+/**
+ * 侧边栏信息
+ */
+export interface SiderInfo {
+    key: string;
+    value: string | number;
+}
+
 
