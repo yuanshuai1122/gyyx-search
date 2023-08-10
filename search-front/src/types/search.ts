@@ -7,7 +7,7 @@ export interface FileInfo {
     filename: string,
     extension: string,
     resume: string,
-    filesize: number,
+    filesize: string,
     indexingDate: string,
 }
 

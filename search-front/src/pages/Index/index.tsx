@@ -39,7 +39,7 @@ const getContentList = (fileInfos: FileInfo[]|undefined): ReactNode[] => {
                 title={item.filename}
                 projectName={item.projectName}
                 id={item.id}
-                contents={new Map<string, string|number>([
+                contents={new Map<string, string>([
                     ["ID：", item.id],
                     ["文件后缀：", item.extension],
                     ["内容摘要：", item.resume],

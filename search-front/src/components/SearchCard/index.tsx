@@ -3,16 +3,17 @@ import {Card, Tag, Typography} from "antd";
 import Meta from "antd/es/card/Meta";
 import {FolderFilled} from "@ant-design/icons";
 import {Link} from "react-router-dom";
+import './index.css'
 
 const { Text } = Typography;
 
-const contentList = (contentMap: Map<string, string|number>): ReactNode[] => {
+const contentList = (contentMap: Map<string, string>): ReactNode[] => {
     const contentList: ReactNode[] = [];
     contentMap.forEach((value, key) => {
         const pNode: ReactNode =
             <p>
                 {<Text type="secondary">{key}</Text>}
-                <Text strong>{value}</Text>
+                <span className="highlight" dangerouslySetInnerHTML={{__html:value}}/>
             </p>
         contentList.push(pNode)
     })
@@ -25,7 +26,7 @@ interface Props {
     title: string,
     projectName: string
     id: string,
-    contents: Map<string, string|number>
+    contents: Map<string, string>
 }
 const SearchCard  = (props: Props) => {
 

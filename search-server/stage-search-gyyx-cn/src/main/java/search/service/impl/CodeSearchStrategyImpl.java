@@ -14,9 +14,13 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.unit.Fuzziness;
+import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.stereotype.Component;
 import search.beans.codedocinfo.CodeDocInfo;
@@ -28,6 +32,7 @@ import search.strategy.SearchStrategy;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Map;
 
 /**
  * @program: gyyx-search
@@ -51,6 +56,8 @@ public class CodeSearchStrategyImpl implements SearchStrategy {
             return new ResultBean<>(RetCodeEnum.PARAM_ERROR, "搜索渠道有误", null);
         }
 
+        keywords = "我是好兄弟";
+
         // 创建请求
         SearchSourceBuilder builder = new SearchSourceBuilder();
         // 文件后缀
@@ -63,8 +70,9 @@ public class CodeSearchStrategyImpl implements SearchStrategy {
         }
         // 模糊查询
         if (StringUtils.isNotBlank(keywords)) {
-            keywords = "*" + keywords + "*";
-            builder.query(QueryBuilders.fuzzyQuery("content", keywords));
+            builder.query(QueryBuilders.matchQuery("content", keywords)
+                    .fuzziness(Fuzziness.AUTO)
+                    .analyzer("ik_smart"));
         }
         //结果集合分页
         builder.from(pageNum-1).size(pageSize);
@@ -74,8 +82,14 @@ public class CodeSearchStrategyImpl implements SearchStrategy {
         SearchRequest searchRequest = new SearchRequest();
         searchRequest.indices(search.getChannel());
         searchRequest.source(builder);
+        searchRequest.source().highlighter(new HighlightBuilder()
+                .field("content")
+                // 是否需要与查询字段匹配
+                .requireFieldMatch(false)
+        );
         try {
             // 执行请求
+            log.info("分页查询文档列表开始，searchRequest:{}", searchRequest);
             SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);
             // 解析查询结果
             SearchHit[] hits = response.getHits().getHits();
@@ -90,12 +104,27 @@ public class CodeSearchStrategyImpl implements SearchStrategy {
                 codeDocInfo.setId(hit.getId());
                 CodeDocConstant codeDocConstant = new CodeDocConstant();
                 codeDocConstant.setId(codeDocInfo.getId());
-                // 摘要 截取模糊查询左右各20个字符 TODO 暂时截取40个字符展示
-                String resume = "";
-                if (StringUtils.isNotBlank(codeDocInfo.getContent())) {
-                    resume = codeDocInfo.getContent().substring(0, 300);
+                codeDocConstant.setResume("");
+                if (StringUtils.isNotBlank(keywords)) {
+                    // 关键字不为空 设置字段高亮
+                    Map<String, HighlightField> highlightFields = hit.getHighlightFields();
+                    if (!highlightFields.isEmpty()) {
+                        HighlightField highlightField = highlightFields.get("content");
+                        if (null != highlightField) {
+                            String high = highlightField.getFragments()[0].string();
+                            //high = high.replaceAll("<em>", "<em style={{ color: 'yellow' }}>");
+                            log.info("高亮字段, high:{}", high);
+                            codeDocConstant.setResume(high);
+                        }
+                    }
+                }else {
+                    // 关键字为空 截取字段
+                    String resume = "";
+                    if (StringUtils.isNotBlank(codeDocInfo.getContent())) {
+                        resume = codeDocInfo.getContent().substring(0, Math.min(codeDocInfo.getContent().length(), 300));
+                    }
+                    codeDocConstant.setResume(resume);
                 }
-                codeDocConstant.setResume(resume);
                 codeDocConstant.setExtension(codeDocInfo.getFile().getExtension());
                 codeDocConstant.setFilesize(codeDocInfo.getFile().getFilesize());
                 codeDocConstant.setFilename(codeDocInfo.getFile().getFilename());

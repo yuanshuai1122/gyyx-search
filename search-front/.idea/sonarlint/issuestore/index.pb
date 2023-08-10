@@ -22,7 +22,3 @@ F
 src/constants/index.ts,c/4/c474d60acef81c229fcc1ee87758ef546a37ea82
 =
 src/index.tsx,5/a/5ab44fe33ca96299f51ad4778a73e425b92bf439
-<
-package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
->
-pnpm-lock.yaml,a/8/a829ed6336deb68f9874e5da490e1ec440b0e9b7
