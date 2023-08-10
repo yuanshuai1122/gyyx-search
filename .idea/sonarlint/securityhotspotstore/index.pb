@@ -123,8 +123,6 @@ Z
 *search-server/stage-search-gyyx-cn/pom.xml,8/0/80ca13ac1b3ef3a167d145e7a147119dbdb23534
 
 Osearch-server/stage-search-gyyx-cn/src/main/java/search/beans/testjob/File.java,a/a/aaf4b84b66a6e0c502d30fe9b0493384a31f6f3a
-‚
-Rsearch-server/stage-search-gyyx-cn/src/main/java/search/beans/testjob/TestJob.java,9/b/9b219989452ce80036f99688b77698eb3cabd1c4
 ‡
 Wsearch-server/stage-search-gyyx-cn/src/test/java/search/SearchMainApplicationTests.java,4/f/4f46a79e9767bb010520ddec897bc52dbc67592a
 x
@@ -133,15 +131,5 @@ Hsearch-server/stage-search-gyyx-cn/src/test/java/search/EsIndexTest.java,1/5/1
 Zsearch-server/stage-search-gyyx-cn/src/main/java/search/factory/SearchStrategyFactory.java,e/2/e2d6bec31ad025bdd89ff9f66ff13bd94670d55c
 ‚
 Rsearch-server/stage-search-gyyx-cn/src/main/java/search/SearchMainApplication.java,f/3/f3e270031692a1577bcda2302079be5894ab6639
-‚
-Rsearch-server/stage-search-gyyx-cn/src/main/java/search/service/SearchService.java,6/a/6a1417fca9e89a3402b6653e3373d9974e301aa9
-„
-Tsearch-server/stage-search-gyyx-cn/src/main/java/search/strategy/SearchStrategy.java,9/a/9a08368cfbf903a072f2bee5687cf5f55df4a6eb
-‹
-[search-server/stage-search-gyyx-cn/src/main/java/search/service/impl/SearchServiceImpl.java,5/0/50a3e972b48557d10e2e13d70c325b0a895c072c
-~
-Nsearch-server/stage-search-gyyx-cn/src/main/java/search/enums/SearchEnums.java,3/8/38af4e86b30ce5f6a9dc192924b7d2472db8670a
 w
 Gsearch-server/stage-search-gyyx-cn/src/test/java/search/SearchTest.java,b/f/bfacf413366dfb239230e9df7ee1866bae7dd814
-’
-bsearch-server/stage-search-gyyx-cn/src/main/java/search/service/impl/WechatSearchStrategyImpl.java,d/7/d7e0c4e8aafe15354de3d3ad9adc36883babca51

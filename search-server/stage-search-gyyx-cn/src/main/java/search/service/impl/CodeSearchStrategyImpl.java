@@ -8,6 +8,8 @@ import com.google.gson.GsonBuilder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.elasticsearch.action.get.GetRequest;
+import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
@@ -19,7 +21,8 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.stereotype.Component;
 import search.beans.filelist.FileInfo;
 import search.beans.filelist.FilePageList;
-import search.beans.testjob.TestJob;
+import search.beans.codefileinfo.CodeFileInfo;
+import search.beans.vo.CodeFileDetail;
 import search.enums.SearchEnums;
 import search.strategy.SearchStrategy;
 
@@ -83,32 +86,31 @@ public class CodeSearchStrategyImpl implements SearchStrategy {
             FilePageList filePageList = new FilePageList();
             ArrayList<FileInfo> fileInfos = new ArrayList<>();
             for (SearchHit hit : hits) {
-                TestJob testJob = gson.fromJson(gson.toJson(hit.getSourceAsMap()), TestJob.class);
-                testJob.setId(hit.getId());
+                CodeFileInfo codeFileInfo = gson.fromJson(gson.toJson(hit.getSourceAsMap()), CodeFileInfo.class);
+                codeFileInfo.setId(hit.getId());
                 FileInfo fileInfo = new FileInfo();
-                fileInfo.setId(testJob.getId());
+                fileInfo.setId(codeFileInfo.getId());
                 // 摘要 截取模糊查询左右各20个字符 TODO 暂时截取40个字符展示
                 String resume = "";
-                if (StringUtils.isNotBlank(testJob.getContent())) {
-                    resume = testJob.getContent().substring(0, 300);
+                if (StringUtils.isNotBlank(codeFileInfo.getContent())) {
+                    resume = codeFileInfo.getContent().substring(0, 300);
                 }
                 fileInfo.setResume(resume);
-                fileInfo.setExtension(testJob.getFile().getExtension());
-                fileInfo.setFilesize(testJob.getFile().getFilesize());
-                fileInfo.setFilename(testJob.getFile().getFilename());
+                fileInfo.setExtension(codeFileInfo.getFile().getExtension());
+                fileInfo.setFilesize(codeFileInfo.getFile().getFilesize());
+                fileInfo.setFilename(codeFileInfo.getFile().getFilename());
                 String fileProjectName = "";
-                if (StringUtils.isNotBlank(testJob.getPath().getVirtual())) {
-                    fileProjectName = testJob.getPath().getVirtual().split("/")[1];
+                if (StringUtils.isNotBlank(codeFileInfo.getPath().getVirtual())) {
+                    fileProjectName = codeFileInfo.getPath().getVirtual().split("/")[1];
                 }
                 fileInfo.setProjectName(fileProjectName);
-                fileInfo.setIndexingDate(testJob.getFile().getIndexingDate());
+                fileInfo.setIndexingDate(codeFileInfo.getFile().getIndexingDate());
                 fileInfos.add(fileInfo);
             }
             filePageList.setFileInfos(fileInfos);
             filePageList.setPageNum(pageNum);
             filePageList.setPageSize(pageSize);
             filePageList.setTotal(response.getHits().getTotalHits().value);
-
 
             return new ResultBean<>(RetCodeEnum.SUCCESS, "查询成功", filePageList);
         }catch (Exception e) {
@@ -117,4 +119,50 @@ public class CodeSearchStrategyImpl implements SearchStrategy {
         }
 
     }
+
+    @Override
+    public ResultBean<Object> searchInfo(String channel, String id) {
+        // 根据渠道获取索引列表
+        SearchEnums search = SearchEnums.search(channel);
+        if (null == search) {
+            return new ResultBean<>(RetCodeEnum.PARAM_ERROR, "搜索渠道有误", null);
+        }
+        // 创建索引,即获取索引
+        GetRequest request = new GetRequest();
+        // 外层参数
+        request.id(id);
+        request.index(search.getChannel());
+        try {
+            // 发送请求
+            log.info("根据id查询文档详情开始发送请求，request:{}", request);
+            GetResponse response = client.get(request, RequestOptions.DEFAULT);
+            // 反序列化
+            CodeFileInfo fileInfo = gson.fromJson(gson.toJson(response.getSourceAsMap()), CodeFileInfo.class);
+            fileInfo.setId(response.getId());
+            CodeFileDetail fileDetail = new CodeFileDetail();
+            fileDetail.setId(fileInfo.getId());
+            fileDetail.setFilename(fileInfo.getFile().getFilename());
+            fileDetail.setContent(fileInfo.getContent());
+            fileDetail.setExtension(fileInfo.getFile().getExtension());
+            fileDetail.setContentType(fileInfo.getFile().getContentType());
+            fileDetail.setCreated(fileInfo.getFile().getCreated());
+            fileDetail.setLastModified(fileInfo.getFile().getLastModified());
+            fileDetail.setLastAccessed(fileInfo.getFile().getLastAccessed());
+            fileDetail.setIndexingDate(fileInfo.getFile().getIndexingDate());
+            fileDetail.setFilesize(fileInfo.getFile().getFilesize());
+            String fileProjectName = "";
+            if (StringUtils.isNotBlank(fileInfo.getPath().getVirtual())) {
+                fileProjectName = fileInfo.getPath().getVirtual().split("/")[1];
+            }
+            fileDetail.setProjectName(fileProjectName);
+            fileDetail.setFilePath(fileInfo.getPath().getVirtual());
+            return new ResultBean<>(RetCodeEnum.SUCCESS, "查询成功", fileDetail);
+        }catch (Exception e) {
+            log.info("根据id查询文档详情发生异常,e:{}", e.toString());
+            return new ResultBean<>(RetCodeEnum.SERVER_ERROR, "查询文档详情失败", null);
+        }
+
+    }
+
+
 }

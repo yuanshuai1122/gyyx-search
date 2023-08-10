@@ -1,4 +1,4 @@
-package search.beans.testjob;
+package search.beans.codefileinfo;
 
 import lombok.Data;
 

@@ -18,11 +18,22 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public ResultBean<Object> searchList(String channel, String keywords, String extension, String projectName, Integer pageNum, Integer pageSize){
-        // 通过支付策略工厂拿到支付类型实现
-        SearchStrategy payStrategy = SearchStrategyFactory.getPayStrategy(channel);
-        if(payStrategy == null){
+        // 通过搜索策略工厂拿到搜索类型实现
+        SearchStrategy searchStrategy = SearchStrategyFactory.getPayStrategy(channel);
+        if(searchStrategy == null){
             return new ResultBean<>(RetCodeEnum.PARAM_ERROR, "搜索渠道有误", null);
         }
-        return payStrategy.searchList(channel, keywords, extension, projectName, pageNum, pageSize);
+        return searchStrategy.searchList(channel, keywords, extension, projectName, pageNum, pageSize);
     }
+
+    @Override
+    public ResultBean<Object> searchInfo(String channel, String id) {
+        // 通过搜索策略工厂拿到搜索类型实现
+        SearchStrategy searchStrategy = SearchStrategyFactory.getPayStrategy(channel);
+        if(searchStrategy == null){
+            return new ResultBean<>(RetCodeEnum.PARAM_ERROR, "搜索渠道有误", null);
+        }
+        return searchStrategy.searchInfo(channel, id);
+    }
+
 }

@@ -17,4 +17,11 @@ public class WechatSearchStrategyImpl implements SearchStrategy {
     public ResultBean<Object> searchList(String channel, String keywords, String extension, String projectName, Integer pageNum, Integer pageSize) {
         return new ResultBean<>(RetCodeEnum.SUCCESS, "获取成功", null);
     }
+
+    @Override
+    public ResultBean<Object> searchInfo(String channel, String id) {
+        return new ResultBean<>(RetCodeEnum.SUCCESS, "获取成功", null);
+    }
+
+
 }

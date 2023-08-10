@@ -24,4 +24,12 @@ public interface SearchStrategy {
      */
     ResultBean<Object> searchList(String channel, String keywords, String extension, String projectName, Integer pageNum, Integer pageSize);
 
+    /**
+     * 根据id搜索文件详情
+     *
+     * @param channel 渠道
+     * @param id      ID
+     * @return {@link ResultBean}<{@link Object}>
+     */
+    ResultBean<Object> searchInfo(String channel, String id);
 }

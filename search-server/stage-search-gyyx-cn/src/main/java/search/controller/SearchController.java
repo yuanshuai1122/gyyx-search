@@ -21,7 +21,7 @@ import search.service.SearchService;
 public class SearchController {
 
 
-    private final SearchService service;
+    private final SearchService searchService;
 
 
     /**
@@ -43,7 +43,22 @@ public class SearchController {
                                          @RequestParam("pageNum") Integer pageNum,
                                          @RequestParam("pageSize") Integer pageSize) {
         log.info("开始搜索信息列表，channel:{}, keywords:{}, extension:{}, projectName:{}, pageNum:{}, pageSize:{}", channel, keywords, extension, projectName, pageNum, pageSize);
-        return service.searchList(channel, keywords, extension, projectName, pageNum, pageSize);
+        return searchService.searchList(channel, keywords, extension, projectName, pageNum, pageSize);
+    }
+
+
+    /**
+     * 根据id搜索文件详情
+     *
+     * @param channel 渠道
+     * @param id      ID
+     * @return {@link ResultBean}<{@link Object}>
+     */
+    @RequestMapping("/info")
+    public ResultBean<Object> searchInfo(@RequestParam("channel") String channel,
+                                         @RequestParam("id") String id) {
+        log.info("根据id查询文件详情开始，id:{}", id);
+        return searchService.searchInfo(channel, id);
     }
 
 

@@ -22,12 +22,12 @@ public enum SearchEnums {
     /**
      * 代码
      */
-    CODE("test-job","代码","codeSearchStrategy"),
+    CODE("test-job","代码渠道","codeSearchStrategy"),
 
     /**
      * 微信支付
      */
-    WECHAT("wechat","企业微信","wechatSearchStrategy")
+    WECHAT("wechat","企业微信渠道","wechatSearchStrategy")
 
 
     ;
