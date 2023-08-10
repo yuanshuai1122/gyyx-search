@@ -1,7 +1,7 @@
 import {FileInfo, PageInfo} from "../../types/search";
 import React, {ReactNode, useEffect, useState} from "react";
 import SearchCard from "../../components/SearchCard";
-import {getFilePageList} from "../../services/search";
+import {getDocPageList} from "../../services/search";
 import SearchPagination from "../../components/SearchPagination";
 import {Layout} from "antd";
 
@@ -13,6 +13,13 @@ const contentStyle: React.CSSProperties = {
     minHeight: 300,
     color: '#fff',
     backgroundColor: '#108ee9',
+};
+
+const siderStyle: React.CSSProperties = {
+    textAlign: 'center',
+    minHeight: 300,
+    color: '#fff',
+    backgroundColor: '#3ba0e9',
 };
 
 
@@ -56,7 +63,7 @@ const Index: React.FC = () => {
     });
 
     useEffect(()=> {
-        getFilePageList({
+        getDocPageList({
             channel: "test-job",
             pageNum: 1,
             pageSize: 20
@@ -79,7 +86,6 @@ const Index: React.FC = () => {
     }, [])
 
     return (
-
         <Layout>
             <Layout hasSider>
                 <Content style={contentStyle}>
@@ -88,19 +94,13 @@ const Index: React.FC = () => {
                     })}
                     <SearchPagination defaultCurrent={pageInfo.pageNum} total={pageInfo.total}/>
                 </Content>
+                <Sider
+                    width={400}
+                    style={siderStyle}>
+                    2232
+                </Sider>
             </Layout>
         </Layout>
-
-
-        // <SearchLayout
-        //     contents={
-        //         nodeList
-        //     }
-        //     footer={
-        //         <SearchPagination defaultCurrent={pageInfo.pageNum} total={pageInfo.total}/>
-        //     }
-        // />
-
     );
 }
 

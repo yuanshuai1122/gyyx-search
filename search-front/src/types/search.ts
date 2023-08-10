@@ -27,4 +27,22 @@ export interface PageInfo {
     total: number,
 }
 
+/**
+ * 文档详情
+ */
+export interface DocDetail {
+    id: string,
+    filename: string,
+    content: string,
+    extension: string,
+    contentType: string,
+    created: string,
+    lastModified: string,
+    lastAccessed: string,
+    indexingDate: string,
+    filesize: number,
+    projectName: string,
+    filePath: string
+}
+
 

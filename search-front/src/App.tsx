@@ -5,6 +5,8 @@ import {Content, Footer, Header} from "antd/es/layout/layout";
 import SearchInput from "./components/SearchInput";
 import {Layout, Space} from "antd";
 import Sider from "antd/es/layout/Sider";
+import DocDetail from "./pages/DocumentDetail";
+import DocumentDetail from "./pages/DocumentDetail";
 
 const headerStyle: React.CSSProperties = {
     textAlign: 'center',
@@ -23,12 +25,7 @@ const footerStyle: React.CSSProperties = {
     backgroundColor: 'red',
 };
 
-const siderStyle: React.CSSProperties = {
-    textAlign: 'center',
-    minHeight: 300,
-    color: '#fff',
-    backgroundColor: '#3ba0e9',
-};
+
 
 const App = () => {
     return (
@@ -43,13 +40,9 @@ const App = () => {
                         <Content>
                             <Routes>
                                 <Route path="/" element={<Index />}></Route>
+                                <Route path="/:id" element={<DocumentDetail />}></Route>
                             </Routes>
                         </Content>
-                        <Sider
-                            width={400}
-                            style={siderStyle}>
-                            2232
-                        </Sider>
                     </Layout>
                     <Footer style={footerStyle}>
                         全局footer
