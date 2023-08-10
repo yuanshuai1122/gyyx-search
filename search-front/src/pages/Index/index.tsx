@@ -1,10 +1,19 @@
 import {FileInfo, PageInfo} from "../../types/search";
-import {ReactNode, useEffect, useState} from "react";
+import React, {ReactNode, useEffect, useState} from "react";
 import SearchCard from "../../components/SearchCard";
-import { getFilePageList } from "../../services/search";
-import SearchLayout from "../../components/SearchLayout";
-import SearchInput from "../../components/SearchInput";
+import {getFilePageList} from "../../services/search";
 import SearchPagination from "../../components/SearchPagination";
+import {Layout} from "antd";
+
+const { Header, Footer, Sider, Content } = Layout;
+
+
+const contentStyle: React.CSSProperties = {
+    //textAlign: 'center',
+    minHeight: 300,
+    color: '#fff',
+    backgroundColor: '#108ee9',
+};
 
 
 /**
@@ -61,7 +70,7 @@ const Index: React.FC = () => {
             })
             // 调用方法生成组件列表
             setNodeList(
-                getContentList(response.data.fileInfos)
+                getContentList(response.data.codeDocConstants)
             )
         }).catch(error => {
             console.error(error)
@@ -71,14 +80,26 @@ const Index: React.FC = () => {
 
     return (
 
-        <SearchLayout
-            contents={
-                nodeList
-            }
-            footer={
-                <SearchPagination defaultCurrent={pageInfo.pageNum} total={pageInfo.total}/>
-            }
-        />
+        <Layout>
+            <Layout hasSider>
+                <Content style={contentStyle}>
+                    {nodeList?.map((item, index)=> {
+                        return item;
+                    })}
+                    <SearchPagination defaultCurrent={pageInfo.pageNum} total={pageInfo.total}/>
+                </Content>
+            </Layout>
+        </Layout>
+
+
+        // <SearchLayout
+        //     contents={
+        //         nodeList
+        //     }
+        //     footer={
+        //         <SearchPagination defaultCurrent={pageInfo.pageNum} total={pageInfo.total}/>
+        //     }
+        // />
 
     );
 }

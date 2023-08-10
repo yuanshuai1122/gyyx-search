@@ -1,8 +1,10 @@
 import React from 'react';
 import {Route, Routes} from 'react-router-dom';
 import Index from "./pages/Index";
-import {Header, Footer} from "antd/es/layout/layout";
+import {Content, Footer, Header} from "antd/es/layout/layout";
 import SearchInput from "./components/SearchInput";
+import {Layout, Space} from "antd";
+import Sider from "antd/es/layout/Sider";
 
 const headerStyle: React.CSSProperties = {
     textAlign: 'center',
@@ -21,19 +23,39 @@ const footerStyle: React.CSSProperties = {
     backgroundColor: 'red',
 };
 
+const siderStyle: React.CSSProperties = {
+    textAlign: 'center',
+    minHeight: 300,
+    color: '#fff',
+    backgroundColor: '#3ba0e9',
+};
+
 const App = () => {
     return (
         <>
-            <Header style={headerStyle}>
-                <SearchInput/>
-            </Header>
-            <Routes>
-                <Route path="/" element={<Index />}></Route>
-            </Routes>
-            <Footer
-                style={footerStyle}>
-                2312321321
-            </Footer>
+
+            <Space direction="vertical" style={{ width: '100%' }} size={[0, 48]}>
+                <Layout>
+                    <Header style={headerStyle}>
+                        <SearchInput/>
+                    </Header>
+                    <Layout hasSider>
+                        <Content>
+                            <Routes>
+                                <Route path="/" element={<Index />}></Route>
+                            </Routes>
+                        </Content>
+                        <Sider
+                            width={400}
+                            style={siderStyle}>
+                            2232
+                        </Sider>
+                    </Layout>
+                    <Footer style={footerStyle}>
+                        全局footer
+                    </Footer>
+                </Layout>
+            </Space>
         </>
     );
 };

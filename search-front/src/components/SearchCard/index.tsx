@@ -1,8 +1,9 @@
-import React, {ReactNode, useEffect} from 'react';
-import {Avatar, Card, Image, Space, Tag, Typography} from "antd";
+import React, {ReactNode} from 'react';
+import {Card, Tag, Typography} from "antd";
 import Meta from "antd/es/card/Meta";
-import {FolderFilled, TwitterOutlined} from "@ant-design/icons";
+import {FolderFilled} from "@ant-design/icons";
 import {Link} from "react-router-dom";
+
 const { Text } = Typography;
 
 const contentList = (contentMap: Map<string, string|number>): ReactNode[] => {

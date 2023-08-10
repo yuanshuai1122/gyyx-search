@@ -1,6 +1,5 @@
 import React, {ReactNode} from 'react';
-import { Layout, Space } from 'antd';
-import Search from "antd/es/input/Search";
+import {Layout, Space} from 'antd';
 
 const { Header, Footer, Sider, Content } = Layout;
 
