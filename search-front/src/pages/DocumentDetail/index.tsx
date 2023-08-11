@@ -2,25 +2,15 @@ import React, {useEffect, useState} from 'react';
 import {useParams} from "react-router-dom";
 import {getDocInfo} from "../../services/search";
 import {DocDetail, SiderInfo} from "../../types/search";
-import {Divider, Layout, List, Typography} from "antd";
+import {Layout} from "antd";
 import {Content} from "antd/es/layout/layout";
-import Sider from "antd/es/layout/Sider";
 
 
 const contentStyle: React.CSSProperties = {
     textAlign: 'center',
-    minHeight: 600,
+    minHeight: 800,
     color: 'black',
     backgroundColor: 'white',
-};
-
-const siderStyle: React.CSSProperties = {
-    textAlign: 'left',
-    minHeight: 600,
-    color: 'white',
-    backgroundColor: 'white',
-    paddingLeft: 40
-
 };
 
 /**
@@ -112,22 +102,6 @@ const DocumentDetail:React.FC<Props> = ({getDocPanel}) => {
                             {docDetail?.content}
                         </div>
                     </Content>
-                    {/*<Sider*/}
-                    {/*    width={400}*/}
-                    {/*    style={siderStyle}>*/}
-                    {/*    <Divider orientation="center">文档信息</Divider>*/}
-                    {/*    <List*/}
-                    {/*        split={false}*/}
-                    {/*        bordered={false}*/}
-                    {/*        dataSource={docInfo}*/}
-                    {/*        renderItem={(item) => (*/}
-                    {/*            <List.Item>*/}
-                    {/*                <Typography.Text type="secondary">{item.key}</Typography.Text>{item.value.toString()}*/}
-                    {/*            </List.Item>*/}
-                    {/*        )}*/}
-                    {/*    />*/}
-
-                    {/*</Sider>*/}
                 </Layout>
             </Layout>
         </>

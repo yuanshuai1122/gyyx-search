@@ -5,7 +5,7 @@ import {Content, Footer, Header} from "antd/es/layout/layout";
 import SearchInput from "./components/SearchInput";
 import {Divider, Layout, List, Space, Typography} from "antd";
 import Sider from "antd/es/layout/Sider";
-import DocDetail from "./pages/DocumentDetail";
+import './App.css'
 import DocumentDetail from "./pages/DocumentDetail";
 import {SEARCH_CHANNEL} from "./constants";
 import {SiderInfo} from "./types/search";
@@ -14,10 +14,9 @@ const headerStyle: React.CSSProperties = {
     textAlign: 'center',
     display: 'flex',
     alignItems: 'center',
-    color: 'red',
     height: 120,
     paddingInline: 50,
-    backgroundColor: 'red',
+    backgroundColor: 'white',
 };
 
 const footerStyle: React.CSSProperties = {
@@ -27,15 +26,16 @@ const footerStyle: React.CSSProperties = {
     backgroundColor: 'red',
 };
 
-
 const siderStyle: React.CSSProperties = {
     textAlign: 'left',
-    minHeight: 600,
+    minHeight: 800,
     color: 'white',
     backgroundColor: 'white',
     paddingLeft: 40
 
 };
+
+
 
 /**
  * 文档信息Sider
@@ -88,16 +88,15 @@ const App = () => {
         setFlag(flag)
     }
 
-
     return (
         <>
             <Space direction="vertical" style={{ width: '100%' }} size={[0, 48]}>
                 <Layout>
-                    <Header style={headerStyle}>
+                    <Header className={'layout-header'} style={headerStyle}>
                         <SearchInput getKeywords={getKeywords}/>
                     </Header>
                     <Layout hasSider>
-                        <Content>
+                        <Content className={'layout-content'}>
                             <Routes>
                                 <Route
                                     path="/"
@@ -110,7 +109,9 @@ const App = () => {
                                 <Route
                                     path="/:id"
                                     element={
-                                    <DocumentDetail getDocPanel={getDocPanel} />
+                                    <DocumentDetail
+                                        getDocPanel={getDocPanel}
+                                    />
                                 }></Route>
                             </Routes>
                         </Content>

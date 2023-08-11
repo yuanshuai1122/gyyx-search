@@ -9,7 +9,7 @@ const { Header, Footer, Sider, Content } = Layout;
 
 const contentStyle: React.CSSProperties = {
     //textAlign: 'center',
-    minHeight: 300,
+    minHeight: 800,
     color: 'white',
     backgroundColor: '#fcfcfc',
     paddingTop: 20
