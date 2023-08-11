@@ -2,8 +2,7 @@ import {FileInfo, PageInfo} from "../../types/search";
 import React, {ReactNode, useEffect, useState} from "react";
 import SearchCard from "../../components/SearchCard";
 import {getDocPageList} from "../../services/search";
-import SearchPagination from "../../components/SearchPagination";
-import {Layout} from "antd";
+import {Layout, Pagination} from "antd";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -11,8 +10,8 @@ const { Header, Footer, Sider, Content } = Layout;
 const contentStyle: React.CSSProperties = {
     //textAlign: 'center',
     minHeight: 300,
-    color: '#fff',
-    backgroundColor: '#108ee9',
+    color: 'white',
+    backgroundColor: '#fcfcfc',
 };
 
 const siderStyle: React.CSSProperties = {
@@ -52,21 +51,43 @@ const getContentList = (fileInfos: FileInfo[]|undefined): ReactNode[] => {
     return contents;
 }
 
+interface Props {
+    channel: string,
+    keywords?: string,
+    extension?: string,
+    projectName?: string,
+}
 
-const Index: React.FC = () => {
+const Home = (props: Props) => {
 
+    const {channel, keywords, extension, projectName} = props
     const [nodeList, setNodeList] = useState<ReactNode[]>();
     const [pageInfo, setPageInfo] = useState<PageInfo>({
         pageNum: 1,
-        pageSize: 20,
+        pageSize: 10,
         total: 100
     });
 
+    /**
+     * 分页处理
+     * @param page 页数
+     * @param pageSize 页大小
+     */
+    const pageChangeHandle = (page: number, pageSize: number): void => {
+        setPageInfo({
+            pageNum: page,
+            pageSize: pageSize,
+            total: pageInfo.total
+        })
+    }
+
     useEffect(()=> {
+        console.log(pageInfo)
         getDocPageList({
-            channel: "test-job",
-            pageNum: 1,
-            pageSize: 20
+            channel: channel,
+            pageNum: pageInfo.pageNum,
+            pageSize: pageInfo.pageSize,
+            keywords: keywords
         }).then(response => {
             console.log(response.data)
             // 设置分页信息
@@ -83,7 +104,7 @@ const Index: React.FC = () => {
             console.error(error)
         })
 
-    }, [])
+    }, [keywords, pageInfo.pageNum, pageInfo.pageSize])
 
     return (
         <Layout>
@@ -92,16 +113,23 @@ const Index: React.FC = () => {
                     {nodeList?.map((item, index)=> {
                         return item;
                     })}
-                    <SearchPagination defaultCurrent={pageInfo.pageNum} total={pageInfo.total}/>
+                    <Pagination
+                        total={pageInfo.total}
+                        pageSize={pageInfo.pageSize}
+                        current={pageInfo.pageNum}
+                        defaultCurrent={pageInfo.pageNum}
+                        onChange={pageChangeHandle}
+                        style={{textAlign: 'center'}}
+                    />;
                 </Content>
                 <Sider
                     width={400}
                     style={siderStyle}>
-                    2232
+                    这里是搜索选项
                 </Sider>
             </Layout>
         </Layout>
     );
 }
 
-export default Index;
+export default Home;

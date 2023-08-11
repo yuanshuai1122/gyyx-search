@@ -7,7 +7,3 @@
 package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
 <
 src/index.js,f/9/f900edc44cb929c2267a16100a32851f6d5b477d
-P
- src/pages/elasticsearch/index.js,5/3/53dff6e5ce36eb1ff956b6cc5bb2e02a6a8758fc
-A
-src/pages/root.js,1/6/162f5982f22e5a2ceccfe6106181d0605687e7dc

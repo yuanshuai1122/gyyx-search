@@ -11,7 +11,7 @@ const contentList = (contentMap: Map<string, string>): ReactNode[] => {
     const contentList: ReactNode[] = [];
     contentMap.forEach((value, key) => {
         const pNode: ReactNode =
-            <p>
+            <p key={key}>
                 {<Text type="secondary">{key}</Text>}
                 <span className="highlight" dangerouslySetInnerHTML={{__html:value}}/>
             </p>

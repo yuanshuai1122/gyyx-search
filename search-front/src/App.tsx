@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Route, Routes} from 'react-router-dom';
-import Index from "./pages/Index";
+import Home from "./pages/Home/home";
 import {Content, Footer, Header} from "antd/es/layout/layout";
 import SearchInput from "./components/SearchInput";
 import {Layout, Space} from "antd";
 import Sider from "antd/es/layout/Sider";
 import DocDetail from "./pages/DocumentDetail";
 import DocumentDetail from "./pages/DocumentDetail";
+import {SEARCH_CHANNEL} from "./constants";
 
 const headerStyle: React.CSSProperties = {
     textAlign: 'center',
@@ -28,18 +29,31 @@ const footerStyle: React.CSSProperties = {
 
 
 const App = () => {
+
+    const [keywordInfo, setKeywordInfo] = useState<string>('');
+
+    const getKeywords = (keywords: string) => {
+        console.log(keywords)
+        setKeywordInfo(keywords)
+    }
+
+
     return (
         <>
-
             <Space direction="vertical" style={{ width: '100%' }} size={[0, 48]}>
                 <Layout>
                     <Header style={headerStyle}>
-                        <SearchInput/>
+                        <SearchInput getKeywords={getKeywords}/>
                     </Header>
                     <Layout hasSider>
                         <Content>
                             <Routes>
-                                <Route path="/" element={<Index />}></Route>
+                                <Route path="/" element={
+                                    <Home
+                                    channel={SEARCH_CHANNEL.CODE}
+                                    keywords={keywordInfo}
+                                    />}
+                                ></Route>
                                 <Route path="/:id" element={<DocumentDetail />}></Route>
                             </Routes>
                         </Content>
