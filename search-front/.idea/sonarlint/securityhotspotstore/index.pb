@@ -20,7 +20,5 @@ D
 src/index.tsx,5/a/5ab44fe33ca96299f51ad4778a73e425b92bf439
 U
 %src/components/SearchLayout/index.tsx,7/6/7609e20c939f6ba778ec527fa4899f29750fd84c
-R
-"src/pages/DocumentDetail/index.tsx,2/7/27195f01a893f2c1dd93a7b483ec8c74d9a68bdd
 >
 pnpm-lock.yaml,a/8/a829ed6336deb68f9874e5da490e1ec440b0e9b7

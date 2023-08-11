@@ -56,8 +56,6 @@ public class CodeSearchStrategyImpl implements SearchStrategy {
             return new ResultBean<>(RetCodeEnum.PARAM_ERROR, "搜索渠道有误", null);
         }
 
-        keywords = "我是好兄弟";
-
         // 创建请求
         SearchSourceBuilder builder = new SearchSourceBuilder();
         // 文件后缀
@@ -112,7 +110,6 @@ public class CodeSearchStrategyImpl implements SearchStrategy {
                         HighlightField highlightField = highlightFields.get("content");
                         if (null != highlightField) {
                             String high = highlightField.getFragments()[0].string();
-                            //high = high.replaceAll("<em>", "<em style={{ color: 'yellow' }}>");
                             log.info("高亮字段, high:{}", high);
                             codeDocConstant.setResume(high);
                         }

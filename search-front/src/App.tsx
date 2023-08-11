@@ -1,20 +1,21 @@
 import React, {useState} from 'react';
 import {Route, Routes} from 'react-router-dom';
-import Home from "./pages/Home/home";
+import Index from "./pages/Home";
 import {Content, Footer, Header} from "antd/es/layout/layout";
 import SearchInput from "./components/SearchInput";
-import {Layout, Space} from "antd";
+import {Divider, Layout, List, Space, Typography} from "antd";
 import Sider from "antd/es/layout/Sider";
 import DocDetail from "./pages/DocumentDetail";
 import DocumentDetail from "./pages/DocumentDetail";
 import {SEARCH_CHANNEL} from "./constants";
+import {SiderInfo} from "./types/search";
 
 const headerStyle: React.CSSProperties = {
     textAlign: 'center',
     display: 'flex',
     alignItems: 'center',
     color: 'red',
-    height: 64,
+    height: 120,
     paddingInline: 50,
     backgroundColor: 'red',
 };
@@ -27,14 +28,64 @@ const footerStyle: React.CSSProperties = {
 };
 
 
+const siderStyle: React.CSSProperties = {
+    textAlign: 'left',
+    minHeight: 600,
+    color: 'white',
+    backgroundColor: 'white',
+    paddingLeft: 40
+
+};
+
+/**
+ * 文档信息Sider
+ * @param docInfo 文档信息
+ */
+const docInfoSider = (docInfo: SiderInfo[] | undefined) => {
+    return (
+        <>
+            <Divider orientation="center">文档信息</Divider>
+            <List
+                split={false}
+                bordered={false}
+                dataSource={docInfo ?? []}
+                renderItem={(item) => (
+                    <List.Item>
+                        <Typography.Text type="secondary">{item.key}</Typography.Text>{item.value.toString()}
+                    </List.Item>
+                )}
+            />
+        </>
+    )
+}
+
+/**
+ * 搜索选项sider
+ * @param info 信息
+ */
+const searchOptionSider = (info: string) => {
+    return (
+        <>
+            <Divider orientation="center">搜索选项</Divider>
+            <div>{info}</div>
+        </>
+    )
+}
 
 const App = () => {
 
     const [keywordInfo, setKeywordInfo] = useState<string>('');
+    const [docInfo, setDocInfo] = useState<SiderInfo[]>()
+    const [flag, setFlag] = useState<number>(0);
 
-    const getKeywords = (keywords: string) => {
-        console.log(keywords)
+    const getKeywords = (keywords: string, flag: number) => {
         setKeywordInfo(keywords)
+        setFlag(flag)
+    }
+
+    const getDocPanel = (infos: SiderInfo[], flag: number): void => {
+        setDocInfo(infos)
+        setFlag(flag)
     }
 
 
@@ -48,15 +99,27 @@ const App = () => {
                     <Layout hasSider>
                         <Content>
                             <Routes>
-                                <Route path="/" element={
-                                    <Home
+                                <Route
+                                    path="/"
+                                    element={
+                                    <Index
                                     channel={SEARCH_CHANNEL.CODE}
                                     keywords={keywordInfo}
                                     />}
                                 ></Route>
-                                <Route path="/:id" element={<DocumentDetail />}></Route>
+                                <Route
+                                    path="/:id"
+                                    element={
+                                    <DocumentDetail getDocPanel={getDocPanel} />
+                                }></Route>
                             </Routes>
                         </Content>
+                        <Sider
+                            width={400}
+                            style={siderStyle}>
+                            {flag == 1 ? docInfoSider(docInfo) : searchOptionSider("这里是首页搜索信息")}
+
+                        </Sider>
                     </Layout>
                     <Footer style={footerStyle}>
                         全局footer

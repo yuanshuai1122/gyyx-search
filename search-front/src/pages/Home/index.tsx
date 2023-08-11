@@ -12,13 +12,7 @@ const contentStyle: React.CSSProperties = {
     minHeight: 300,
     color: 'white',
     backgroundColor: '#fcfcfc',
-};
-
-const siderStyle: React.CSSProperties = {
-    textAlign: 'center',
-    minHeight: 300,
-    color: '#fff',
-    backgroundColor: '#3ba0e9',
+    paddingTop: 20
 };
 
 
@@ -122,11 +116,6 @@ const Home = (props: Props) => {
                         style={{textAlign: 'center'}}
                     />;
                 </Content>
-                <Sider
-                    width={400}
-                    style={siderStyle}>
-                    这里是搜索选项
-                </Sider>
             </Layout>
         </Layout>
     );

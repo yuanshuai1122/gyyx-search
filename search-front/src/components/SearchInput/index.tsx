@@ -1,18 +1,19 @@
 import React from 'react';
 import Search from "antd/es/input/Search";
+import {useNavigate} from "react-router-dom";
 
 type Props = {
-    getKeywords: (value: string) => void;
+    getKeywords: (value: string, flag: number) => void;
 };
 const SearchInput: React.FC<Props> = ({getKeywords}) => {
 
-    // const [input, setInput] = useState<string>("");
-    //
-    // const changeHandle = (event: any) => {
-    //     console.log(event.target.value)
-    //     setInput(event.target.value)
-    // }
+    const navigate = useNavigate();
 
+    const handleInputChange = (value: string) => {
+        getKeywords(value, 0)
+        // 重定向到首页
+        //navigate('/');
+    }
 
     return (
         <>
@@ -22,8 +23,7 @@ const SearchInput: React.FC<Props> = ({getKeywords}) => {
                 placeholder="请输入关键字"
                 enterButton="搜索"
                 size="large"
-                // onChange={changeHandle}
-                onSearch={getKeywords}
+                onSearch={handleInputChange}
             />
         </>
     );

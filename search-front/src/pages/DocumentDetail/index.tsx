@@ -77,11 +77,14 @@ const buildDocInfoData = (docData: DocDetail): SiderInfo[] => {
 
 }
 
-const DocumentDetail = () => {
+type Props = {
+    getDocPanel: (infos: SiderInfo[], flag: number) => void;
+};
+
+const DocumentDetail:React.FC<Props> = ({getDocPanel}) => {
 
     const { id} = useParams();
     const [docDetail, setDocDetail] = useState<DocDetail>();
-    const [docInfo, setDocInfo] = useState<SiderInfo[]>()
 
     useEffect(()=> {
         getDocInfo({
@@ -91,11 +94,10 @@ const DocumentDetail = () => {
             console.log(response.data)
             const docData: DocDetail = response.data
             setDocDetail(docData)
-            setDocInfo(buildDocInfoData(docData))
+            getDocPanel(buildDocInfoData(docData), 1)
         }).catch(error => {
             console.log(error)
         })
-
     }, [])
 
     return (
@@ -110,22 +112,22 @@ const DocumentDetail = () => {
                             {docDetail?.content}
                         </div>
                     </Content>
-                    <Sider
-                        width={400}
-                        style={siderStyle}>
-                        <Divider orientation="center">文档信息</Divider>
-                        <List
-                            split={false}
-                            bordered={false}
-                            dataSource={docInfo}
-                            renderItem={(item) => (
-                                <List.Item>
-                                    <Typography.Text type="secondary">{item.key}</Typography.Text>{item.value.toString()}
-                                </List.Item>
-                            )}
-                        />
+                    {/*<Sider*/}
+                    {/*    width={400}*/}
+                    {/*    style={siderStyle}>*/}
+                    {/*    <Divider orientation="center">文档信息</Divider>*/}
+                    {/*    <List*/}
+                    {/*        split={false}*/}
+                    {/*        bordered={false}*/}
+                    {/*        dataSource={docInfo}*/}
+                    {/*        renderItem={(item) => (*/}
+                    {/*            <List.Item>*/}
+                    {/*                <Typography.Text type="secondary">{item.key}</Typography.Text>{item.value.toString()}*/}
+                    {/*            </List.Item>*/}
+                    {/*        )}*/}
+                    {/*    />*/}
 
-                    </Sider>
+                    {/*</Sider>*/}
                 </Layout>
             </Layout>
         </>
