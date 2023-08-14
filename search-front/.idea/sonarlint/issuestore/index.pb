@@ -20,10 +20,6 @@ D
 src/index.tsx,5/a/5ab44fe33ca96299f51ad4778a73e425b92bf439
 U
 %src/components/SearchLayout/index.tsx,7/6/7609e20c939f6ba778ec527fa4899f29750fd84c
->
-pnpm-lock.yaml,a/8/a829ed6336deb68f9874e5da490e1ec440b0e9b7
-S
-#src/components/SearchCard/index.css,e/b/ebaade8f6cf3063abdf2204b83b53f39fc3b8127
 F
 src/services/search.ts,2/5/252a736478969aca42f8859855f5de52ff1e1d5d
 S
@@ -32,21 +28,5 @@ S
 -.idea/sonarlint/securityhotspotstore/index.pb,8/8/88a9255124c95bdc913197c120a8d560edc59c8e
 Å
 Q.idea/sonarlint/securityhotspotstore/7/6/7609e20c939f6ba778ec527fa4899f29750fd84c,c/1/c19e78a56c2e28b47bdf5cad76a338a08d2da807
-S
-#src/components/SearchCard/index.tsx,b/1/b1d53c6a722edf09140c9a1767542077eff3b96f
 F
 src/constants/index.ts,c/4/c474d60acef81c229fcc1ee87758ef546a37ea82
-;
-src/App.tsx,8/3/835da56f32df714aaed6285a5b7fc3a7807851e4
-T
-$src/components/SearchInput/index.tsx,c/9/c9717ad897160cb8888ceb61e9ee4fa8150beda0
-;
-src/App.css,a/a/aa7165aefcf8ee3d73539e99ab007daf1aa18d8d
-H
-src/pages/Home/index.tsx,9/3/939b21a7f2d23f548a573a6c3857899762b55197
-C
-src/types/search.ts,7/8/78a01e7432673870f41578fd40e3533733ab42b4
-<
-package.json,7/0/7030d0b2f71b999ff89a343de08c414af32fc93a
-R
-"src/pages/DocumentDetail/index.tsx,2/7/27195f01a893f2c1dd93a7b483ec8c74d9a68bdd

@@ -15,7 +15,6 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.Fuzziness;
-import org.elasticsearch.index.query.MatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -31,7 +30,6 @@ import search.enums.SearchEnums;
 import search.strategy.SearchStrategy;
 import search.utils.MarkdownConverterUtils;
 
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;

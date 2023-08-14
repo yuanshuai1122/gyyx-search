@@ -31,8 +31,15 @@ const siderStyle: React.CSSProperties = {
     minHeight: 800,
     color: 'white',
     backgroundColor: 'white',
-    paddingLeft: 40
+    paddingLeft: 40,
+    paddingRight: '5%'
 
+};
+const contentStyle: React.CSSProperties = {
+    minHeight: 800,
+    paddingTop: 25,
+    paddingLeft: '5%',
+    paddingRight: '5%',
 };
 
 
@@ -96,7 +103,7 @@ const App = () => {
                         <SearchInput getKeywords={getKeywords}/>
                     </Header>
                     <Layout hasSider>
-                        <Content className={'layout-content'}>
+                        <Content className={'layout-content'} style={contentStyle}>
                             <Routes>
                                 <Route
                                     path="/"

@@ -36,7 +36,7 @@ const SearchCard  = (props: Props) => {
         <>
             <Card
                 bordered={true}
-                style={{width: '90%', marginLeft: 50, marginBottom: 30, marginTop: 30, paddingLeft: '5%', paddingRight: '5%'}}
+                style={{width: '100%', marginBottom: 20}}
                 hoverable={true}
             >
                 <Meta

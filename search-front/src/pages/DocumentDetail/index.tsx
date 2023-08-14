@@ -6,15 +6,15 @@ import {Layout} from "antd";
 import {Content} from "antd/es/layout/layout";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from 'remark-gfm'
+import './index.css'
 
 
 const contentStyle: React.CSSProperties = {
     textAlign: 'left',
     minHeight: 800,
-    color: 'black',
     backgroundColor: 'white',
-    paddingLeft: '20%',
-    paddingRight: '20%'
+    paddingLeft: '5%',
+    paddingRight: '5%',
 };
 
 /**
@@ -112,11 +112,34 @@ const DocumentDetail:React.FC<Props> = ({getDocPanel}) => {
             <Layout>
                 <Layout hasSider>
                     <Content style={contentStyle}>
-                        <h1>
-                            {docDetail?.filename}
-                        </h1>
-                        <div>
-                            <ReactMarkdown children={docDetail.content} remarkPlugins={[remarkGfm]} />;
+                        <div className={"md-content"}>
+                            <h1>
+                                {docDetail.filename}
+                            </h1>
+                            <div>
+                                <ReactMarkdown
+                                    children={docDetail.content}
+                                    remarkPlugins={[remarkGfm]}
+                                    // components={{
+                                    //     code({node, inline, className, children, ...props}) {
+                                    //         const match = /language-(\w+)/.exec(className || '')
+                                    //         return !inline && match ? (
+                                    //             <SyntaxHighlighter
+                                    //                 children={String(children).replace(/\n$/, '')}
+                                    //                 style={dark}
+                                    //                 language={match[1]}
+                                    //                 PreTag="div"
+                                    //                 {...props}
+                                    //             />
+                                    //         ) : (
+                                    //             <code className={className} {...props}>
+                                    //                 {children}
+                                    //             </code>
+                                    //         )
+                                    //     }
+                                    // }}
+                                />;
+                            </div>
                         </div>
                     </Content>
                 </Layout>
