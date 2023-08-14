@@ -4,13 +4,17 @@ import {getDocInfo} from "../../services/search";
 import {DocDetail, SiderInfo} from "../../types/search";
 import {Layout} from "antd";
 import {Content} from "antd/es/layout/layout";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from 'remark-gfm'
 
 
 const contentStyle: React.CSSProperties = {
-    textAlign: 'center',
+    textAlign: 'left',
     minHeight: 800,
     color: 'black',
     backgroundColor: 'white',
+    paddingLeft: '20%',
+    paddingRight: '20%'
 };
 
 /**
@@ -74,7 +78,20 @@ type Props = {
 const DocumentDetail:React.FC<Props> = ({getDocPanel}) => {
 
     const { id} = useParams();
-    const [docDetail, setDocDetail] = useState<DocDetail>();
+    const [docDetail, setDocDetail] = useState<DocDetail>({
+        id: "",
+        filename: "",
+        content: "",
+        extension: "",
+        contentType: "",
+        created: "",
+        lastModified: "",
+        lastAccessed: "",
+        indexingDate: "",
+        filesize: 0,
+        projectName: "",
+        filePath: ""
+    });
 
     useEffect(()=> {
         getDocInfo({
@@ -99,7 +116,7 @@ const DocumentDetail:React.FC<Props> = ({getDocPanel}) => {
                             {docDetail?.filename}
                         </h1>
                         <div>
-                            {docDetail?.content}
+                            <ReactMarkdown children={docDetail.content} remarkPlugins={[remarkGfm]} />;
                         </div>
                     </Content>
                 </Layout>

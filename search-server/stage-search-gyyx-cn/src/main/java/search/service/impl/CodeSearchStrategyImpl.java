@@ -29,7 +29,9 @@ import search.beans.filelist.DocPageList;
 import search.beans.vo.CodeDocDetail;
 import search.enums.SearchEnums;
 import search.strategy.SearchStrategy;
+import search.utils.MarkdownConverterUtils;
 
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Map;
@@ -46,6 +48,7 @@ import java.util.Map;
 public class CodeSearchStrategyImpl implements SearchStrategy {
 
     private final RestHighLevelClient client;
+    private final MarkdownConverterUtils converterUtils;
     Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 
     @Override
@@ -168,7 +171,9 @@ public class CodeSearchStrategyImpl implements SearchStrategy {
             CodeDocDetail docDetail = new CodeDocDetail();
             docDetail.setId(fileInfo.getId());
             docDetail.setFilename(fileInfo.getFile().getFilename());
-            docDetail.setContent(fileInfo.getContent());
+            // 转换内容为markdown格式
+            String contentMd = converterUtils.convertToMarkdown(fileInfo.getContent(), fileInfo.getFile().getFilename());
+            docDetail.setContent(contentMd);
             docDetail.setExtension(fileInfo.getFile().getExtension());
             docDetail.setContentType(fileInfo.getFile().getContentType());
             docDetail.setCreated(fileInfo.getFile().getCreated());
