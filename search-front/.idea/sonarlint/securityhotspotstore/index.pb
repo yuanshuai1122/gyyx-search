@@ -1,6 +1,4 @@
 
-=
-src/index.css,c/5/c5d38a62d1faae90a2acaa34b79a7ef365c917e4
 A
 package-lock.json,f/a/fa288d1472d29beccb489a676f68739ad365fc47
 A
@@ -16,8 +14,6 @@ A
 tsconfig.json,6/1/61ebb9fd6e8cf9082658121d5d81e297791dacd0
 D
 src/utils/request.ts,4/f/4f98643a765bda61eec19aa34030baf0b5226849
-=
-src/index.tsx,5/a/5ab44fe33ca96299f51ad4778a73e425b92bf439
 U
 %src/components/SearchLayout/index.tsx,7/6/7609e20c939f6ba778ec527fa4899f29750fd84c
 F
@@ -28,5 +24,9 @@ S
 -.idea/sonarlint/securityhotspotstore/index.pb,8/8/88a9255124c95bdc913197c120a8d560edc59c8e
 Å
 Q.idea/sonarlint/securityhotspotstore/7/6/7609e20c939f6ba778ec527fa4899f29750fd84c,c/1/c19e78a56c2e28b47bdf5cad76a338a08d2da807
-F
-src/constants/index.ts,c/4/c474d60acef81c229fcc1ee87758ef546a37ea82
+C
+src/types/search.ts,7/8/78a01e7432673870f41578fd40e3533733ab42b4
+T
+$src/components/SearchInput/index.tsx,c/9/c9717ad897160cb8888ceb61e9ee4fa8150beda0
+S
+#src/components/SearchCard/index.css,e/b/ebaade8f6cf3063abdf2204b83b53f39fc3b8127

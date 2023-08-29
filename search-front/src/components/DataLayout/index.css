@@ -1,0 +1,12 @@
+.logo-vertical {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    flex: 1 1;
+    height: 120px;
+}
+.logo-vertical-img {
+    height: 34px;
+    width: 138px;
+}
